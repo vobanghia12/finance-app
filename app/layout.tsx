@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter, Roboto, Anton } from 'next/font/google';
+import { Inter, Anton } from 'next/font/google';
 import './globals.css';
 import NavBar from '@/components/NavBar';
 
+// define fonts in nextjs rules
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-export const anton = Anton({
+const anton = Anton({
   subsets: ['latin'],
   weight: '400',
-  variable: '--font-roboto',
+  variable: '--font-anton',
 });
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${inter.className}`}>
+      <body className={`${inter.variable} ${anton.variable}`}>
         <NavBar />
         {children}
       </body>
