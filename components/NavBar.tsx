@@ -12,6 +12,7 @@ import { Button } from './ui/button';
 import { RiMenu3Line } from 'react-icons/ri';
 import { useState } from 'react';
 import MobileMenu from './MobileMenu';
+import { redirect } from 'next/navigation';
 const NavBar = () => {
   const [isOpenMobileMenu, setOpenMobileMenu] = useState<boolean>(false);
   return (
@@ -22,25 +23,18 @@ const NavBar = () => {
         </h1>
       </Link>
       <Button
-        className='lg:hidden p-0 transition-all duration-1000'
+        className='lg:hidden transition active:rotate-45 duration-200 ease-in'
         onClick={() => {
-          console.log('Hi');
           setOpenMobileMenu(!isOpenMobileMenu);
         }}
       >
-        {!isOpenMobileMenu ? (
-          <RiMenu3Line
-            size={30}
-            className='transition-all duration-400 delay-1000 ease-in-out'
-          />
-        ) : (
-          <IoClose
-            size={30}
-            className='transition-all duration-400 delay-150 ease-in-out'
-          />
-        )}
+        {!isOpenMobileMenu ? <RiMenu3Line size={30} /> : <IoClose size={30} />}
       </Button>
-      {isOpenMobileMenu ? <MobileMenu /> : ''}
+      {isOpenMobileMenu ? (
+        <MobileMenu className='translate-x-0' />
+      ) : (
+        <MobileMenu className='translate-x-full' />
+      )}
       <NavigationMenu className='text-primary-50 m-auto font-medium hidden lg:block'>
         <NavigationMenuList className='flex list-none justify-center px-5'>
           <NavigationMenuItem>
@@ -80,7 +74,7 @@ const NavBar = () => {
           Sign Up
         </Button>
         <Button className=' bg-primary-25 rounded-full font-semibold hover:bg-primary-25/50 w-24 shadow-lg shadow-primary-25/40'>
-          Log In
+          <Link href='./signin'>Sign In</Link>
         </Button>
       </div>
     </nav>
